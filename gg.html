@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <title>Хэрэглэгчийн бүртгэл</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff4e50, #f9d423);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      display: flex;
+      gap: 40px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 250px;
+    }
+
+    input {
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #ff7e79;
+      border-radius: 10px;
+      background: #fff2f2;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff3e3e;
+      box-shadow: 0 0 6px rgba(255, 78, 80, 0.5);
+    }
+
+    button {
+      padding: 12px;
+      font-size: 16px;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    table {
+      width: 550px;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    }
+
+    th {
+      background: #ffe6e6;
+      color: #d62828;
+      padding: 14px;
+    }
+
+    td {
+      background: #fffafa;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .delete-btn {
+      color: #ff3e3e;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .delete-btn:hover {
+      transform: scale(1.2);
+      color: #e60000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="form-group">
+      <input type="text" placeholder="Овог..." id="surname">
+      <input type="text" placeholder="Нэр..." id="name">
+      <input type="number" placeholder="Нас..." id="age">
+      <button onclick="registerUser()">Бүртгэх</button>
+    </div>
+
+    <div>
+      <h2>Хэрэглэгчийн бүртгэл</h2>
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>ОВОГ</th>
+            <th>НЭР</th>
+            <th>НАС</th>
+            <th>ҮЙЛДЭЛ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>БАТ</td>
+            <td>БОЛД</td>
+            <td>30</td>
+            <td><span class="delete-btn" onclick="deleteRow(this)">❌</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function registerUser() {
+      const surname = document.getElementById('surname').value;
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+
+      if (surname && name && age) {
+        const table = document.getElementById("userTable").getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+        const rowCount = table.rows.length;
+
+        newRow.innerHTML = `
+          <td>${rowCount}</td>
+          <td>${surname}</td>
+          <td>${name}</td>
+          <td>${age}</td>
+          <td><span class="delete-btn" onclick="deleteRow(this)">❌</span></td>
+        `;
+
+        document.getElementById('surname').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('age').value = '';
+      }
+    }
+
+    function deleteRow(btn) {
+  const isConfirmed = confirm("Та энэ мэдээллийг устгахдаа итгэлтэй байна уу?");
+
+  if (isConfirmed) {
+    const row = btn.closest("tr");
+    row.remove();
+
+    const rows = document.querySelectorAll("#userTable tbody tr");
+    rows.forEach((tr, index) => {
+      tr.cells[0].innerText = index + 1;
+    });
+  }
+}
+
+  </script>
+
+</body>
+</html>

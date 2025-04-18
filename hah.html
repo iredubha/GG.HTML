@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modal Form</title>
+  <style>
+    /* Modal background */
+    .modal {
+      display: none; /* анх харагдахгүй */
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    /* Modal content */
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Close button */
+    .close {
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Trigger Button -->
+  <button onclick="openModal()">Форм нээх</button>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Бүртгэлийн форм</h2>
+      <form>
+        <label>Нэр:</label>
+        <input type="text" placeholder="Нэрээ оруулна уу">
+
+        <label>Имэйл:</label>
+        <input type="email" placeholder="Имэйл хаяг">
+
+        <label>Нууц үг:</label>
+        <input type="password" placeholder="Нууц үг">
+
+        <button type="submit">Илгээх</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function openModal() {
+      document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('myModal').style.display = 'none';
+    }
+
+    // Modal дээр дархаас гадна гадна талд дарахад хаах
+    window.onclick = function(event) {
+      const modal = document.getElementById('myModal');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
